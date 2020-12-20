@@ -1,0 +1,85 @@
+extends ../layout
+
+block content
+  h1= title
+
+  form(method='post')
+
+    label Product name:
+      input(type='text' name='name' placeholder='Knitted sweater' value= product ? product.name : '' )
+
+    label Category:
+      select(name='category')
+        each category in categories
+          option(value=category._id selected=product ? product.category === category._id.toString() : false)= category.name
+
+    fieldset
+      legend Styles:
+        div
+          each style in styles.filter(style => style.category.toString() === (product ? product.category : categories[0]._id.toString()))
+            label
+              input(type='checkbox' name='style' value=style._id checked=product ? product.style.includes(style._id.toString()) : false)
+              | #{style.name}
+
+    label Price in USD:
+      input(type='number' name='price' placeholder='30' value=product ? product.price : '')
+
+    label Description:
+      textarea(name='description' placeholder='Warm and cosy...')= product ? product.description : ''
+
+    label Fabric:
+      each fabric in fabrics
+        div.row
+          label
+            input(type='checkbox' name='fabric' value=fabric._id checked=product ? product.fabric.find(obj => obj.type === fabric._id.toString()) : false)
+            | #{fabric.name}
+          input(type='number' name=`${fabric._id}_percentage` disabled value=percentages ? percentages[fabric._id.toString()] : '')
+          | %
+          
+    button(type='submit') Add product
+    
+    ul
+      each error in errors || []
+        li #{error.msg}
+
+
+
+
+
+  script.
+    const styles = !{JSON.stringify(styles)}
+
+    function displayStyleOptions(e) {
+
+      document.querySelector('fieldset div').textContent = '';
+
+      styles
+        .filter(style => style.category.toString() === e.target.value)
+        .forEach(style => {
+
+          const label = document.createElement('label');
+          const labelText = document.createTextNode(style.name);
+
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.name = 'style';
+          checkbox.value = style._id;
+
+          label.appendChild(checkbox);
+          label.appendChild(labelText);
+          document.querySelector('fieldset div').appendChild(label);
+        });
+    }
+
+    function enableFabricPercentageInputs(e) {
+      e.target.parentElement.nextSibling.disabled = !e.target.checked;
+    }
+
+    document.querySelector('[name="category"]').addEventListener('input', displayStyleOptions);
+    document.querySelectorAll('[name="fabric"]').forEach(input => {
+      input.addEventListener('input', enableFabricPercentageInputs);
+    });
+
+    setTimeout(() => document.querySelectorAll('.row [name="fabric"]').forEach(input => {
+      input.parentElement.nextSibling.disabled = !input.checked;
+    }), 0);

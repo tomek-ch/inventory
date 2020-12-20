@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+  h1= title
+
+  if models
+    ul
+      each model in models
+        li
+          a(href=model.url) #{`${model.product.name}${model.color.name ? `, ${model.color.name}` : ''}`}
+
+  else
+    p There are currently no models.

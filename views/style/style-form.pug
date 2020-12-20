@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  h1= title
+
+  form(method='post')
+    label Name:
+      input(type='text' name='name' placeholder='Aviator' value=style ? style.name : '')
+
+    label Category: 
+      select(name='category')
+        each category in categories
+          option(value=category._id selected=style ? style.category === category._id.toString() : false)= category.name
+
+    button(type='submit') Add new style
+
+    ul
+      each error in errors || []
+        li= error.msg

@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  h1= title
+  a(href='/instances/new') Add new piece
+
+  if instances
+    ul
+      each model in models.sort((a, b) => a.product.name.localeCompare(b.product.name))
+        li
+          a(href=model.url)
+            h2 #{model.product.name}, #{model.gender}, #{model.color.name}
+          ul
+            each instance in instances.filter(instance => instance.model._id.toString() === model._id.toString())
+              li
+                a(href=instance.url) #{model.sizes[instance.size]}, #{instance.available ? 'Available' : 'Not available'}
+
+  else
+    p There are currently no pieces.

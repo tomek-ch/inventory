@@ -1,0 +1,36 @@
+extends ../layout
+
+block content
+
+  h1= title
+  p Price: $#{product.price}
+  p Category: #[a(href=product.category.url) #{product.category.name}]
+
+  if product.style.length
+    p Styles:
+    ul
+      each style in product.style
+        li
+          a(href=style.url) #{style.name}
+
+  h2 Description:
+  p #{product.description}
+
+  h2 Fabric:
+  ul
+    each fabric in product.fabric
+      li #{fabric.type.name} - #{fabric.percentage}%
+
+
+  h2 Models of this product:
+
+  if models.length
+    ul
+      each model in models
+        li
+          a(href=model.url) #{model.gender}, #{model.color.name}
+
+  else
+    p There are no models of this product.
+
+

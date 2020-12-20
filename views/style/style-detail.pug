@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  h1= title
+  p Style of #[a(href=style.category.url) #{style.category.name.toLowerCase()}]
+
+  h2 Products in this style
+  if products.length
+    ul
+      each product in products
+        li
+          a(href=product.url) #{product.name}
+  else
+    p There are no products in this style.

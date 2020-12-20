@@ -1,0 +1,66 @@
+extends ../layout
+
+block content
+  h1= title
+
+  form(method='post')
+
+    label Product: 
+      select(name='product')
+        each product in products
+          option(value=product._id selected=model ? model.product === product._id.toString() : false)= product.name
+
+    label Color:
+      select(name='color')
+        each color in colors
+          option(value=color._id selected=model ? model.color === color._id.toString() : false)= color.name
+
+    label Gender:
+      select(name='gender')
+        option(value='Men') Men
+        option(value='Women') Women
+        option(value='Unisex') Unisex
+
+    label Sizes (comma separated list):
+      input(type='text' name='sizes' placeholder='S, M, L')
+
+    button(type='submit') Add new model
+
+  ul
+    each error in errors || []
+      li= error.msg
+
+
+
+  script.
+
+    const products = !{JSON.stringify(products ? products : [])};
+    const categories = !{JSON.stringify(categories ? categories : [])};
+
+    function displayGenders(id) {
+      const productCategory = products.find(product => product._id.toString() === id).category;
+      const gender = categories.find(category => category._id.toString() === productCategory).gender;
+      document.querySelector('[name="gender"]').textContent = '';
+      const genders = gender === 'Both' ? ['Men', 'Women', 'Unisex'] : [gender];
+
+      genders.forEach(gender => {
+        const option = document.createElement('option');
+        option.value = gender;
+        option.textContent = gender;
+        document.querySelector('[name="gender"]').appendChild(option);
+      });
+    }
+
+    function handleChange(e) {
+      displayGenders(e.target.value);
+    }
+
+    document.querySelector('[name="product"]').addEventListener('input', handleChange);
+    
+    const productId = document.querySelector('[name="product"] option:checked').value;
+    displayGenders(productId);
+
+    const selectedGender = '!{model ? model.gender : false}';
+    if (selectedGender) {
+      document.querySelector(`[value=${selectedGender}]`).selected = true;
+    }

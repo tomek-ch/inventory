@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+
+  h1= title
+  a(href='/products/new') Add new product
+  br
+  a(href='/models/new') Add new model
+
+  if products
+    ul
+      each product in products
+        li
+          a(href=product.url)
+            h2 #{product.name}
+          ul
+            each model in models.filter(model => model.product.name === product.name)
+              li
+                a(href=model.url) #{model.gender}, #{model.color.name}
+
+  else
+    p There are currently no products.

@@ -1,0 +1,57 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+nav a {
+  display: block;
+}
+
+.color-preview {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: 1px solid lightgray;
+}
+
+fieldset {
+  border: none;
+  margin: 1em 0;
+  padding: 0;
+}
+
+input:not([type="checkbox"]), label, textarea {
+  display: block;
+}
+
+textarea {
+  resize: none;
+}
+
+label {
+  margin-top: 1.3em;
+  margin-bottom: 1em;
+}
+
+.percentage {
+  float: left;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+}
+
+.row * {
+  margin-right: 1em;
+}
+
+.row [type="number"] {
+  width: 3em;
+  margin-right: 0;
+  text-align: right;
+}

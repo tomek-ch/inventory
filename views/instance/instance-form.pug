@@ -1,0 +1,47 @@
+extends ../layout
+
+block content
+  h1= title
+
+  form(method='post')
+    label Model: 
+      select(name='model')
+        each model in models
+          option(value=model._id) #{model.product.name}, #{model.color.name}, #{model.gender}
+
+    label Size: 
+        select(name='size')
+    
+    label Amount:
+      input(type='number' name='amount' min='1' step='1' value=amount || 1)
+
+    label
+      input(type='checkbox' name='available' value='true')
+      | Pieces are available
+
+    button(type='submit') Add new piece
+
+    ul
+      each error in errors || []
+        li= error.msg
+
+
+    script.
+      const models = !{JSON.stringify(models)};
+      
+      function displaySizes(modelId) {
+        document.querySelector('[name="size"]').textContent = '';
+        models.find(model => model._id.toString() === modelId).sizes.forEach((size, i) => {
+          const option = document.createElement('option');
+          option.value = i;
+          option.textContent = size;
+          document.querySelector('[name="size"]').appendChild(option);
+        });
+      }
+
+      function handleChange(e) {
+        displaySizes(e.target.value);
+      }
+
+      document.querySelector('[name="model"]').addEventListener('input', handleChange);
+      displaySizes(document.querySelector('[name="model"] option:checked').value);

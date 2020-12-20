@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+  h1= title
+
+  form(method='post')
+    label Fabric name:
+      input(type='text' name='name' placeholder='Cotton' value=fabric ? fabric.name : '')
+    button(type='submit') Add new fabric
+
+  ul
+    each error in errors || []
+      li= error.msg

@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+  h1= title
+
+  form(method='post')
+    label
+      | Color name:
+      input(type='text' name='name' placeholder='Red' value=color ? color.name : '')
+    label
+      | Color representation:
+      input(type='color' name='hex' value=color ? color.hex : '')
+    button(type='submit') Add color
+
+  ul
+    each error in errors || []
+      li #{error.msg}

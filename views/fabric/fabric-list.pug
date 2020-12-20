@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+
+  h1= title
+  a(href='/fabrics/new') Add new fabric
+
+  if fabrics
+    ul
+      each fabric in fabrics
+        li
+          a(href=fabric.url) #{fabric.name}
+  else
+    p There are currently no fabrics.

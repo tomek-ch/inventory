@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+  h1= title
+
+  p Id: #{instance._id}
+  p Model: #[a(href=instance.model.url) #{instance.model.product.name}, #{instance.model.gender}, #{instance.model.color.name}]
+  p Size: #{instance.model.sizes[instance.size]}
+  p Status: #{instance.available ? 'Available' : 'Unavailable'}

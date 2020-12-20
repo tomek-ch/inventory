@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+
+  h1= title
+  a(href='colors/new') Add new color
+
+  if colors
+    ul
+      each color in colors
+        li
+          div.color-preview(style=`background-color: ${color.hex}`)
+          a(href=color.url) #{color.name}
+      
+  else
+    p There are currently no colors.

@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+  h1= title
+
+  form(method='post')
+    label Category name:
+      input(type='text' name='name' placeholder='Outerwear' value=category ? category.name : false)
+    label Gender:
+      select(name='gender')
+        each gender in ['Both', 'Men', 'Women']
+          option(value=gender selected=category ? category.gender === gender : false)= gender
+    button(type='submit') Add category
+
+  ul
+    each error in errors || []
+      li= error.msg

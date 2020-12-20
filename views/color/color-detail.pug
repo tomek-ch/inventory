@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+
+  h1= title
+  div.color-preview(style=`background-color: ${color.hex};`)
+  h2 Models in this color
+
+  if models.length
+    ul
+      each model in models
+        li
+          a(href=model.url) #{model.product.name}, #{model.gender}
+
+  else
+    p There are no models in this color.
+  
+  form(action=`${color.url}/delete` method="post")
+    input(type='hidden' name='id' value=color._id)
+    button(type='submit') Delete this color
+
+  p Warning: deleting a color will delete all of its related models and their instances.

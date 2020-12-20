@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+  h1= title
+
+  if categories
+    ul
+      each category in categories
+        li
+          a(href=category.url)
+            h2 #{category.name}
+          each style in styles.filter(style => style.category.name === category.name)
+            a(href=style.url) #{style.name}
+
+  else
+    p There are currently no styles.

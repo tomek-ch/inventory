@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+
+  h1= title
+  p For #{category.gender === 'Both' ? 'men and women' : category.gender.toLowerCase()}
+
+  h2 Products from this category
+    if products.length
+      ul
+        each product in products
+          li
+            a(href=product.url) #{product.name}
+
+    else
+      p There are no products in this category

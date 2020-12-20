@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome back
+
+  main
+    h2 Record counts
+
+    if error
+      p There was an error getting the record counts.
+      
+    else
+      ul
+        li Products: !{count.product}
+        li Categories: !{count.category}
+        li Styles: !{count.style}
+        li Models: !{count.model}
+        li Instances: !{count.instance}
+        li Fabrics: !{count.fabric}
+        li Colors: !{count.color}

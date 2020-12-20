@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+
+  h1= title
+  p Gender: #{model.gender}
+  p Product: 
+    a(href=model.product.url)= model.product.name
+  p Color: 
+    a(href=model.color.url)= model.color.name
+
+  h2 Sizes:
+  ul
+  each size in model.sizes
+    li= size
+
+  h2 Pieces:
+  if instances.length
+    ul
+    each instance in instances
+      li
+        a(href=instance.url) #{model.sizes[instance.size]}, #{instance.available ? 'available' : 'unavailable'}
+  else
+    p There are no pieces of this model.

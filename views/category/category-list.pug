@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+
+  h1= title
+  a(href='/categories/new') Add new category
+  br
+  a(href='/styles/new') Add new style
+
+  if categories
+    ul
+      each category in categories.sort((a, b) => a.name.localeCompare(b.name))
+        li
+          a(href=category.url)
+            h2 #{category.name}
+          ul
+            each style in styles.filter(style => style.category.name === category.name)
+              li
+                a(href=style.url) #{style.name}
+
+  else
+    p There are currently no categories.
