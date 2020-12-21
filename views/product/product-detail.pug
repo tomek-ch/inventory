@@ -32,5 +32,11 @@ block content
 
   else
     p There are no models of this product.
+  
+  hr
+  form(method='post' action='/products/delete')
+    input(type='hidden' name='id' value=product._id)
+    button(type='submit') Delete this product
+  p Warning: Deleting a product deletes all of its associated models and pieces.
 
 

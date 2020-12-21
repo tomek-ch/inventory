@@ -12,3 +12,9 @@ block content
           a(href=product.url) #{product.name}
   else
     p There are no products made of this fabric.
+      
+  form(action='/fabrics/delete' method="post")
+    input(type='hidden' name='id' value=fabric._id)
+    button(type='submit') Delete this fabric
+
+  p Warning: Deleting a fabric will delete all of its related products, models and pieces.

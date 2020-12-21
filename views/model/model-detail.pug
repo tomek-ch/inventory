@@ -22,3 +22,9 @@ block content
         a(href=instance.url) #{model.sizes[instance.size]}, #{instance.available ? 'available' : 'unavailable'}
   else
     p There are no pieces of this model.
+
+  hr
+  form(method='post' action='/models/delete')
+    input(type='hidden' name='id' value=model._id)
+    button(type='submit') Delete this model
+  p Warning: Deleting a model deletes all of its associated pieces.

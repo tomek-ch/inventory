@@ -4,12 +4,14 @@ const Instance = require('../../models/instance');
 
 module.exports = async function (req, res, next) {
     
-    // await Promise.all([
-    //     Color.findByIdAndDelete(req.body.id),
-    //     Model.remove({ color: req.body.id }),
-    // ]);
+    const { id } = req.body;
+    const models = await Model.find({ color: id }).catch(next);
 
-    // Instance.remove({ color: req.body.id })
+    await Promise.all([
+        Color.findByIdAndDelete(id),
+        Model.deleteMany({ color: id }),
+        ...models.map(model => Instance.deleteMany({ model })),
+    ]).catch(next);
 
-    res.send('helllo');
+    res.redirect('/colors');
 };

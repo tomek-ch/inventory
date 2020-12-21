@@ -15,8 +15,8 @@ block content
   else
     p There are no models in this color.
   
-  form(action=`${color.url}/delete` method="post")
+  form(action='/colors/delete' method="post")
     input(type='hidden' name='id' value=color._id)
     button(type='submit') Delete this color
 
-  p Warning: deleting a color will delete all of its related models and their instances.
+  p Warning: Deleting a color will delete all of its related models and their pieces.

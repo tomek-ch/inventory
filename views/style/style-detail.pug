@@ -12,3 +12,9 @@ block content
           a(href=product.url) #{product.name}
   else
     p There are no products in this style.
+          
+  hr
+  form(method='post' action='/styles/delete')
+    input(type='hidden' name='id' value=style._id)
+    button(type='submit') Delete this style
+  p Deleting a style removes it from all of its products.

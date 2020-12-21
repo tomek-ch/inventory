@@ -113,13 +113,13 @@ router.post('/instances/:id/update', instanceUpdatePost);
 
 // DELETE
 
-router.post('/colors/:id/delete', colorDeletePost);
-router.post('/fabrics/:id/delete', fabricDeletePost);
-router.post('/categories/:id/delete', categoryDeletePost);
-router.post('/styles/:id/delete', styleDeletePost);
-router.post('/products/:id/delete', productDeletePost);
-router.post('/models/:id/delete', modelDeletePost);
-router.post('/instances/:id/delete', instanceDeletePost);
+router.post('/colors/delete', colorDeletePost);
+router.post('/fabrics/delete', fabricDeletePost);
+router.post('/categories/delete', categoryDeletePost);
+router.post('/styles/delete', styleDeletePost);
+router.post('/products/delete', productDeletePost);
+router.post('/models/delete', modelDeletePost);
+router.post('/instances/delete', instanceDeletePost);
 
 
 // DETAIL

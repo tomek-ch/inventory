@@ -7,3 +7,8 @@ block content
   p Model: #[a(href=instance.model.url) #{instance.model.product.name}, #{instance.model.gender}, #{instance.model.color.name}]
   p Size: #{instance.model.sizes[instance.size]}
   p Status: #{instance.available ? 'Available' : 'Unavailable'}
+
+  hr
+  form(method='post' action='/instances/delete')
+    input(type='hidden' name='id' value=instance._id)
+    button(type='submit') Delete this piece
