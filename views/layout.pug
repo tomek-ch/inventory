@@ -5,14 +5,14 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     
-    a(href='/') 
-      h1 Inventory manager
-
     nav
+      a(href='/')
+        h1 Inventory manager
       a(href='/products-and-models') Products #{'&'} models
       a(href='/categories-and-styles') Categories #{'&'} styles
       a(href='/instances') Pieces
       a(href='/fabrics') Fabrics
       a(href='/colors') Colors
 
-    block content
+    main
+      block content

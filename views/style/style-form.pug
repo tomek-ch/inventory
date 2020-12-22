@@ -10,9 +10,9 @@ block content
     label Category: 
       select(name='category')
         each category in categories
-          option(value=category._id selected=style ? style.category === category._id.toString() : false)= category.name
+          option(value=category._id selected=style ? style.category.toString() === category._id.toString() : false)= category.name
 
-    button(type='submit') Add new style
+    button(type='submit') Submit
 
     ul
       each error in errors || []

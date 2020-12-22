@@ -10,7 +10,7 @@ block content
       select(name='gender')
         each gender in ['Both', 'Men', 'Women']
           option(value=gender selected=category ? category.gender === gender : false)= gender
-    button(type='submit') Add category
+    button(type='submit') Submit
 
   ul
     each error in errors || []

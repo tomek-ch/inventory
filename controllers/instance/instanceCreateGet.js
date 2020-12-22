@@ -6,5 +6,5 @@ module.exports = async function (req, res, next) {
         .populate('product')
         .populate('color')
         .catch(next);
-    res.render('instance/instance-form', { title: 'Add new pieces', models });
+    res.render('instance/instance-form', { title: 'Add new pieces', models, createMode: true });
 };

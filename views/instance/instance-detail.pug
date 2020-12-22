@@ -9,6 +9,9 @@ block content
   p Status: #{instance.available ? 'Available' : 'Unavailable'}
 
   hr
+  p
+    a(href=`${instance.url}/update`) Edit this piece
+
   form(method='post' action='/instances/delete')
     input(type='hidden' name='id' value=instance._id)
     button(type='submit') Delete this piece

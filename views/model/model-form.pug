@@ -8,12 +8,12 @@ block content
     label Product: 
       select(name='product')
         each product in products
-          option(value=product._id selected=model ? model.product === product._id.toString() : false)= product.name
+          option(value=product._id selected=model ? model.product.toString() === product._id.toString() : false)= product.name
 
     label Color:
       select(name='color')
         each color in colors
-          option(value=color._id selected=model ? model.color === color._id.toString() : false)= color.name
+          option(value=color._id selected=model ? model.color.toString() === color._id.toString() : false)= color.name
 
     label Gender:
       select(name='gender')
@@ -22,9 +22,9 @@ block content
         option(value='Unisex') Unisex
 
     label Sizes (comma separated list):
-      input(type='text' name='sizes' placeholder='S, M, L')
+      input(type='text' name='sizes' placeholder='S, M, L' value=model ? model.sizes.join(', ') : '')
 
-    button(type='submit') Add new model
+    button(type='submit') Submit
 
   ul
     each error in errors || []

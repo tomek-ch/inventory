@@ -11,12 +11,12 @@ block content
     label Category:
       select(name='category')
         each category in categories
-          option(value=category._id selected=product ? product.category === category._id.toString() : false)= category.name
+          option(value=category._id selected=product ? product.category.toString() === category._id.toString() : false)= category.name
 
     fieldset
       legend Styles:
         div
-          each style in styles.filter(style => style.category.toString() === (product ? product.category : categories[0]._id.toString()))
+          each style in styles.filter(style => style.category.toString() === (product ? product.category.toString() : categories[0]._id.toString()))
             label
               input(type='checkbox' name='style' value=style._id checked=product ? product.style.includes(style._id.toString()) : false)
               | #{style.name}
@@ -31,12 +31,12 @@ block content
       each fabric in fabrics
         div.row
           label
-            input(type='checkbox' name='fabric' value=fabric._id checked=product ? product.fabric.find(obj => obj.type === fabric._id.toString()) : false)
+            input(type='checkbox' name='fabric' value=fabric._id checked=product ? product.fabric.find(obj => obj.type.toString() === fabric._id.toString()) : false)
             | #{fabric.name}
           input(type='number' name=`${fabric._id}_percentage` disabled value=percentages ? percentages[fabric._id.toString()] : '')
           | %
           
-    button(type='submit') Add product
+    button(type='submit') Submit
     
     ul
       each error in errors || []

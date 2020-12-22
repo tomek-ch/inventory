@@ -14,6 +14,9 @@ block content
     p There are no products in this style.
           
   hr
+  p
+    a(href=`${style.url}/update`) Edit this style
+
   form(method='post' action='/styles/delete')
     input(type='hidden' name='id' value=style._id)
     button(type='submit') Delete this style

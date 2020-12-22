@@ -7,20 +7,20 @@ block content
     label Model: 
       select(name='model')
         each model in models
-          option(value=model._id) #{model.product.name}, #{model.color.name}, #{model.gender}
+          option(value=model._id selected=instance ? (instance.model.toString() === model._id.toString()) : false) #{model.product.name}, #{model.color.name}, #{model.gender}
 
     label Size: 
         select(name='size')
     
-    label Amount:
-      input(type='number' name='amount' min='1' step='1' value=amount || 1)
+    if createMode
+      label Amount:
+        input(type='number' name='amount' min='1' step='1' value=amount || 1)
 
     label
       input(type='checkbox' name='available' value='true')
       | Pieces are available
 
-    button(type='submit') Add new piece
-
+    button(type='submit') Submit
     ul
       each error in errors || []
         li= error.msg
@@ -28,13 +28,15 @@ block content
 
     script.
       const models = !{JSON.stringify(models)};
-      
+      const selectedSize = !{instance ? JSON.stringify(instance.size) : false};
+
       function displaySizes(modelId) {
         document.querySelector('[name="size"]').textContent = '';
-        models.find(model => model._id.toString() === modelId).sizes.forEach((size, i) => {
+        models.find(model => model._id.toString() === modelId.toString()).sizes.forEach((size, i) => {
           const option = document.createElement('option');
           option.value = i;
           option.textContent = size;
+          option.selected = selectedSize === i;
           document.querySelector('[name="size"]').appendChild(option);
         });
       }

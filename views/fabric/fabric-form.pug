@@ -6,7 +6,7 @@ block content
   form(method='post')
     label Fabric name:
       input(type='text' name='name' placeholder='Cotton' value=fabric ? fabric.name : '')
-    button(type='submit') Add new fabric
+    button(type='submit') Submit
 
   ul
     each error in errors || []

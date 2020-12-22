@@ -16,6 +16,9 @@ block content
     p There are no products in this category
       
   hr
+  p
+    a(href=`${category.url}/update`) Edit this category
+
   form(method='post' action='/categories/delete')
     input(type='hidden' name='id' value=category._id)
     button(type='submit') Delete this category

@@ -55,3 +55,29 @@ label {
   margin-right: 0;
   text-align: right;
 }
+
+nav {
+  margin-right: 5em;
+}
+
+nav [href="/"] {
+  text-decoration: none;
+}
+
+main {
+  min-width: 800px;
+}
+
+body {
+  display: flex;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+[type="text"], [type="number"], textarea {
+  font-family: inherit;
+  padding: 0.5em;
+  border-radius: 5px;
+  border: 1px solid darkgray;
+  /* background-color: #ddd; */
+}

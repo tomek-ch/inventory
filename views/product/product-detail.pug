@@ -34,6 +34,9 @@ block content
     p There are no models of this product.
   
   hr
+  p
+    a(href=`${product.url}/update`) Edit this product
+
   form(method='post' action='/products/delete')
     input(type='hidden' name='id' value=product._id)
     button(type='submit') Delete this product

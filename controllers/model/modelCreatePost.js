@@ -48,17 +48,20 @@ module.exports = [
                 errors.push({ msg: 'Invalid gender for chosen product\'s category' });
         }
 
-        const [products, colors, categories] = await Promise.all([
-            Product.find(),
-            Color.find(),
-            Category.find(),
-        ]).catch(next);
+        if (errors.length) {
 
-        if (errors.length) return res.render('model/model-form', {
-            title: 'Add new model', model, products, colors, categories, errors
-        });
+            const [products, colors, categories] = await Promise.all([
+                Product.find(),
+                Color.find(),
+                Category.find(),
+            ]).catch(next);
 
-        const newModel = await new Model(model).save();
+            return res.render('model/model-form', {
+                title: 'Add new model', model, products, colors, categories, errors
+            });
+        }
+
+        const newModel = await new Model(model).save().catch(next);
         res.redirect(newModel.url);
     },
 ];

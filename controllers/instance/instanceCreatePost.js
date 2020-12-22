@@ -34,7 +34,7 @@ module.exports = [
         
         if (errors.length) {
             const models = await Model.find().populate('product').populate('color').catch(next);
-            return res.render('instance/instance-form', { title: 'Add new pieces', models, errors, model });
+            return res.render('instance/instance-form', { title: 'Add new pieces', models, errors, model, createMode: true });
         }
 
         const instances = [];
